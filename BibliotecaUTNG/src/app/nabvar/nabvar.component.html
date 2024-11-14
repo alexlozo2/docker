@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #B1BCE6">
+  <a href="/libros">
+    <!--Aqui va la imagen por si no jala-->
+  </a>  
+    <div class="container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" routerLink="/home"><!--Aqui esta la imagen--><img src="assets/imagenes/logo.jpg" alt="logo" height="100px"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link"  *ngIf="estaLogueado" routerLink="/libros" routerLinkActive="active"><i class="fas fa-book"></i> Libros</a>
+              </li>
+              <li class="nav-item" *ngIf="!isBibliotecario">
+                <a class="nav-link"  *ngIf="estaLogueado" routerLink="/misLibros" routerLinkActive="active"><i class="fas fa-book"></i>Mis libros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" *ngIf="!estaLogueado" [routerLink]="['/vistaL']" rel="noopener noreferrer"><i class="fas fa-book-open"></i>Libros</a>
+              </li> 
+              <li class="nav-item" *ngIf="isBibliotecario">
+                <a class="nav-link" *ngIf="estaLogueado" routerLink="/libros/add" routerLinkActive="active"><i class="fas fa-plus-circle"></i> Agregar Libros</a>
+              </li>
+              <li class="nav-item" *ngIf="isBibliotecario">
+                <a class="nav-link" *ngIf="estaLogueado" routerLink="/listaP" routerLinkActive="active"><i class="fas fa-book-open"></i> Prestamos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/nosotros" rel="noopener noreferrer"><i class="fas fa-book-atlas"></i>Sobre nosotros</a>
+              </li>
+             <!-- <li class="nav-item">
+                <a class="nav-link" href="http://www.bibliotecaecest.mx/" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-atlas"></i>Biblioteca Digital</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://media.utng.edu.mx/index.php/s/SmaZsvQ2GgJcrfh" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i>Reglamento Bibliotecario</a>
+              </li>--> 
+              <!-- <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/ubicacion']" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-location-dot"></i>¿Como llegar?</a>
+              </li> -->
+
+              <!--<li class="nav-item">
+                <a class="nav-link" [routerLink]="['/streaming']" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-headset"></i>Conectarse</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/noticias']" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i>Noticias</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/mapa']" rel="noopener noreferrer"><i class="fas fa-book-open"></i>Mapa sitio</a>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+        <a *ngIf="!estaLogueado" class="nav-link" routerLink="/login" routerLinkActive="active"><i
+                class="fas fa-user-circle"></i>Iniciar Sesión</a>
+      <button *ngIf="estaLogueado" class="btn ml-auto mt-2 btn-danger" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+    </div>
+  </nav>
+
+  
+          

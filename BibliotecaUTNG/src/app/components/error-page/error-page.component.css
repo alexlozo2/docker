@@ -1,0 +1,22 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.error-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Aplicar animación de Animate.css */
+  animation: animateBackground 10s infinite alternate;
+}
+
+@keyframes animateBackground {
+  from {
+    background-position: left top;
+  }
+  to {
+    background-position: right top;
+  }
+}

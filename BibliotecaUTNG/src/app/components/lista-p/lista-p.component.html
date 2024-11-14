@@ -1,0 +1,22 @@
+<app-nabvar></app-nabvar>
+<app-ng-dynamic-breadcrumb class="floating-breadcrumb" [bgColor]="'none'" [fontSize]="'13px'" [fontColor]="'rgba(103,93,211,0.4)'"
+  [lastLinkColor]="'#6C5DD3'" [symbol]="' -> '">
+</app-ng-dynamic-breadcrumb>
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Correo</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Fecha Inicio</th>
+        <th scope="col">Fecha Final</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let prestamo of prestamos">
+      <tr >
+        <td>{{prestamo.emailUser}}</td>
+        <td>{{ prestamo.titulo == '' ? 'Titulo Desconocido' : prestamo.titulo }}</td>
+        <td>{{ prestamo.fechaInicio }}</td>
+        <td>{{ prestamo.fechaFin }}</td>
+      </tr>
+    </tbody>
+  </table>

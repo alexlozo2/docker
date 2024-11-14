@@ -1,0 +1,36 @@
+<app-nabvar></app-nabvar>
+<app-secundario-nav></app-secundario-nav>
+<!--Fin del Navbar-->
+
+<div style="margin-top: 2%;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let libro of libros">
+          <div class="card text-center">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+              {{ libro.titulo }}
+            </div>
+            <div class="card card-body text-center cards">
+              <img [src]="libro.img" class="card-img-top">
+  
+              <p>Titulo: {{ libro.titulo == '' ? 'Titulo Desconocido' : libro.titulo }}</p>
+              <p>Autor: {{ libro.nombreAutor == '' ? 'Autor Desconocido' : libro.nombreAutor }}</p>
+              <p>Editorial: {{ libro.editorial == '' ? 'Editorial Desconocida' : libro.editorial }}</p>
+              <p>Categoría: {{ libro.categoria == '' ? 'Categoría Desconocida' : libro.categoria}}</p>
+              <p>Año de publicación: {{ libro.anioPublicacion == '' ? 'Año Desconocido' : libro.anioPublicacion }}</p>
+              <p>Disponibilidad: <b> {{ libro.disponibilidad == '' ? 'Disponibilidad Desconocida' : libro.disponibilidad
+                  }}</b></p>
+              <div style="margin: 1%;">
+                <div *ngIf="libro.disponibilidad == 'Disponible'">
+                  <a [routerLink]="['/login']" target="_blank" class="btn btn-info btn-block">
+                    Registrar para reservar <i class="fas fa-book"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

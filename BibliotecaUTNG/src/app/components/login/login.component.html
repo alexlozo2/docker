@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel="stylesheet" href="./login.component.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    
+
+
+</head>
+
+<body style="background-color: #1f2029">
+    <app-nabvar></app-nabvar>
+    
+    <app-secundario-nav></app-secundario-nav>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="card-body">
+                <!-- INICIO DEL LOGIN -->
+                <div class="section" style="
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;
+                font-size: 7px;
+                line-height: 1.7;
+                color: #c4c3ca;
+                background-color: #1f2029;
+                overflow-x: hidden;
+            ">
+                    <div class="container">
+                        <div class="row full-height justify-content-center">
+                            <div class="col-12 text-center align-self-center py-5">
+                                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                                    <h6 class="mb-0 pb-3"><span>Iniciar Sesion </span><span>Registrarse</span></h6>
+                                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                                    <label for="reg-log"></label>
+                                    <div class="card-3d-wrap mx-auto">
+                                        <div class="card-3d-wrapper">
+                                            <div class="card-front">
+                                                <div class="center-wrap">
+                                                    <div class="section text-center">
+                                                        <img src="assets/imagenes/logo3.png" alt="logo" height="250px">
+                                                        <h4 class="mb-4 pb-3">INICIAR SESIÓN</h4>
+                                                        <div class="form-group">
+                                                            <input type="email" name="logemail" class="form-style"
+                                                                placeholder="Correo electronico" id="logemail"
+                                                                autocomplete="on" [(ngModel)]="email">
+                                                            <i class="input-icon uil uil-at"></i>
+                                                        </div>
+                                                        <div class="form-group mt-2">
+                                                            <input type="password" name="logpass" class="form-style"
+                                                                placeholder="Contraseña" id="logpass" autocomplete="on"
+                                                                [(ngModel)]="contrasena">
+                                                            <i class="input-icon uil uil-lock-alt"></i>
+                                                        </div>
+                                                        
+                                                        <div style="margin-top:-6%;">
+                                                            <button (click)="leguearUsuario(email, contrasena)"
+                                                                class="btn mt-4">Iniciar Sesión</button>
+                                                        </div>
+                                                        <br>
+                                                        <!--Inicio de restaurar-->
+                                                        <div>
+                                                            <a type="btn-block" routerLink="/nuevaC">
+                                                                <h6>¿Olvidaste tu contraseña?</h6>
+                                                            </a>
+                                                        </div>
+                                                        <!--Fin-->
+                                                        <div class="row btn mt-4">
+                                                            <button
+                                                                class="btn btn-lg btn-google btn-block text-uppercase btn-outline"
+                                                                (click)="login()">
+                                                                <img
+                                                                    src="https://img.icons8.com/color/22/000000/google-logo.png">
+                                                                Iniciar con Google
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-back">
+                                                <div class="center-wrap">
+                                                    <div class="section text-center">
+                                                        <img src="assets/imagenes/logo3.png" alt="logo" height="250px">
+                                                        <form class="mb-3" [formGroup]="usuarioForm"
+                                                            (ngSubmit)=" enviarCodigoVerificacion()">
+                                                            <h4 class="mb-4 pb-3">REGISTRARSE</h4>
+                                                            <div class="form-group">
+                                                                <input type="text" name="logname" class="form-style"
+                                                                    placeholder="Nombre" id="logname"
+                                                                    formControlName="nombreUsuario">
+                                                                <i class="input-icon uil uil-user"></i>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.get('nombreUsuario')?.hasError('required') && usuarioForm.get('nombreUsuario')?.touched">
+                                                                    <span>*Este campo <strong>es
+                                                                            obligatorio!!!</strong>*</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <input type="email" name="logemail" class="form-style"
+                                                                    placeholder="Correo electrónico" id="logemail"
+                                                                    formControlName="email">
+                                                                <i class="input-icon uil uil-at"></i>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.get('email')?.hasError('required') && usuarioForm.get('email')?.touched">
+                                                                    <strong>*Este campo es obligatorio!!!</strong>
+                                                                </div>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.get('email')?.hasError('email') && usuarioForm.get('email')?.touched">
+                                                                    <strong>El correo electrónico no es válido.</strong>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <!-- <div class="form-group">
+                                                            <select name="dropdown" class="form-style" id="dropdown"
+                                                                formControlName="rol">
+                                                                <option value="" disabled selected>Rol</option>
+                                                                <option *ngFor="let rol of listRoles" [value]="rol.tipoRol">{{rol.tipoRol }}</option>
+                                                            </select>
+                                                            <i class="input-icon uil uil-angle-down"></i>
+                                                        </div> -->
+                                                            <div class="form-group mt-2">
+                                                                <input type="password" name="logpass" class="form-style"
+                                                                    placeholder="Contraseña" id="logpass"
+                                                                    formControlName="contrasena">
+                                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.get('contrasena')?.hasError('required') && usuarioForm.get('contrasena')?.touched ">
+                                                                    La contraseña es obligatoria!!!
+                                                                </div>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.get('contrasena')?.hasError('pattern')">
+                                                                    La contraseña debe cumplir con los siguientes
+                                                                    requisitos:
+                                                                    <ul>
+                                                                        <li>Debe incluir números.</li>
+                                                                        <li>Utilice una combinación de letras mayúsculas
+                                                                            y minúsculas.</li>
+                                                                        <li>Incluya caracteres especiales como * ? ! @ #
+                                                                            $ / () = . , ; :</li>
+                                                                        <li>Tenga una longitud mayor o igual a 8
+                                                                            caracteres.</li>
+                                                                    </ul>
+                                                                </div>
+
+                                                                <!--<div style="margin-left: 10%; margin-top: 2%;">
+                                                                <div class="verificacion">
+                                                                    <div class="g-recaptcha" data-sitekey="6LdYcbkpAAAAAC-zJrno4gbY39CnkjkG55gKoXK7" #captchaElement></div> <br>
+                                                                    <div *ngIf="" class="alert alert-danger"></div>
+                                                                </div>
+                                                                </div> -->
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <input type="password" name="logpass" class="form-style"
+                                                                    placeholder="Repetir contraseña" id="logpass"
+                                                                    formControlName="confirmarContrasena">
+                                                                <i class="input-icon uil uil-lock-alt"></i>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.get('confirmarContrasena')?.hasError('required') && usuarioForm.get('confirmarContrasena')?.touched">
+                                                                    <span>*Este campo <strong>es
+                                                                            obligatorio!!!</strong>*</span>
+                                                                </div>
+                                                                <div class="text-danger"
+                                                                    *ngIf="usuarioForm.hasError('contrasenaNoCoincide') && usuarioForm.get('confirmarContrasena')?.dirty">
+                                                                    Las contraseñas no coinciden.
+                                                                </div>
+
+
+                                                                <!--<div style="margin-left: 10%; margin-top: 2%;">
+                                                                <div class="verificacion">
+                                                                    <div class="g-recaptcha" data-sitekey="6LdYcbkpAAAAAC-zJrno4gbY39CnkjkG55gKoXK7" #captchaElement></div> <br>
+                                                                    <div *ngIf="" class="alert alert-danger"></div>
+                                                                </div>
+                                                                </div> -->
+                                                            </div>
+                                                            <button class="btn mt-4" type="submit"
+                                                                [disabled]="usuarioForm.invalid" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Registrarse</button>
+
+                                                                <!-- <div class="form-group mt-2">
+                                                                    <input type="text" name="codigoVerificacion"
+                                                                        class="form-style"
+                                                                        placeholder="Código de verificación de cuenta"
+                                                                        id="codigoVerificacion"
+                                                                        formControlName="codigoVerificacion">
+                                                                    <button (click)="verificarCodigo()"
+                                                                        class="btn mt-4">Verificar</button>
+
+                                                                </div> -->
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN DE Login -->
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Inicio DE Youtube -->
+                    <div *ngFor="let video of videos">
+                        <h2>{{ video.snippet.title }}</h2>
+                        <p>{{ video.snippet.description }}</p>
+                        <div *ngIf="video.id.videoId">
+                            <iframe [src]="getVideoUrl(video.id.videoId)" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <!-- FIN DE Youtube -->
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+ <!-- Modal -->
+<div class="modal fade" #staticBackdrop id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Ingresa el código de verificación</h5>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body">
+          <input type="text" id="codigoVerificacionInput"> <!-- Agrega el ID al input -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button id="btnVerificarCodigo" type="button" class="btn btn-success" (click)="verificarCodigo()">Verificar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+
+
+
+    <!-- INICIO DE CARDS -->
+    <a>
+
+    </a>
+    <p>
+
+    </p>
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Misión</h5>
+                    <p class="card-text">Somos una institución de Educación Superior Tecnológica comprometida en la
+                        formación integral de profesionistas líderes en los niveles de Técnico Superior Universitario y
+                        Licenciatura con programas educativos de excelencia, contribuyendo así, al desarrollo económico
+                        y social del estado y la región.</p>
+
+                    <h5 class="card-title">Visión</h5>
+                    <p class="card-text">En el 2026 la Universidad Tecnológica del Norte de Guanajuato será una
+                        institución de educación superior reconocida nacional e internacionalmente por formar egresados
+                        competitivos que se integran exitosamente al ámbito laboral, en los que resaltará su formación
+                        humana e integral; se contará con programas educativos de excelencia, pertinentes e incluyentes;
+                        en los que se promueve la Investigación aplicada e innovación tecnológica a través de sus
+                        cuerpos académicos; se tendrá una fuerte vinculación con todos los sectores y se impulsará el
+                        emprendimiento y la competitividad, contribuyendo así a la transformación de la educación en
+                        Guanajuato
+
+                        Se consolidará el enfoque hacía la igualdad y no discriminación; al desarrollo sostenible y
+                        cuidado del ambiente; al respeto de los derechos humanos; a la promoción de la cultura de paz y
+                        no violencia: a la transparencia y rendición de cuentas en la gestión y administración de los
+                        recursos, utilizando para su implementación referentes estatales, nacionales e internacionales.
+                    </p>
+
+                    <h5 class="card-title">Valores</h5>
+                    <p class="card-text">*Rendición de cuestas *Respeto *Transaparencia *Trabajo en Equipo *Honestidad
+                        *Comunicación *Responsabilidad *Paz
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIN DE CARDS -->
+
+    <!-- partial:index.partial.html -->
+    <!-- <a href="https://front.codes/" class="logo" target="_blank">
+            <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+    </a> -->
+
+    <!-- partial -->
+    <script src="//code.tidio.co/yhbt8a7ddir3dygy3j4mbgcidxeiukb6.js" async></script>
+</body>
+
+</html>

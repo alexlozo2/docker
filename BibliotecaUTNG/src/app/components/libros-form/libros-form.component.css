@@ -1,0 +1,20 @@
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+  }
+  
+  .breadcrumb a {
+    background-color: rgba(108, 93, 211, 0.8); /* Color de fondo de los botones con opacidad */
+    color: #fff; /* Color de texto de los botones */
+    padding: 5px 10px; /* Espacio interno de los botones */
+    border-radius: 5px; /* Borde redondeado de los botones */
+    text-decoration: none; /* Quitar subrayado de los enlaces */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+  }
+  
+  .breadcrumb a:hover {
+    background-color: rgba(108, 93, 211, 1); /* Cambiar color de fondo al pasar el ratón */
+  }

@@ -1,0 +1,83 @@
+<!-- recovery-password.component.html -->
+<app-nabvar></app-nabvar>
+
+<div class="contenedor">
+  <div class="centrado">
+    <form lass="mb-3" [formGroup]="usuarioForm" (ngSubmit)="sendPasswordResetEmail()">
+      <h4>Recuperacion de contraseña</h4>
+      <div class="form-group mt-2">
+        <input type="email" name="logemail" class="form-style" placeholder="Correo electronico" id="logemail"
+          formControlName="email">
+        <i class="input-icon uil uil-at"></i>
+        <div class="text-danger"
+          *ngIf="usuarioForm.get('email')?.hasError('required') && usuarioForm.get('email')?.touched">
+          <strong>*Este campo es obligatorio!!!</strong>
+        </div>
+        <div class="text-danger"
+          *ngIf="usuarioForm.get('email')?.hasError('email') && usuarioForm.get('email')?.touched">
+          <strong>El correo electrónico no es válido.</strong>
+        </div>
+        <div class="form-group mt-2">
+          <input type="password" name="logpass" class="form-style"
+              placeholder="Nueva contraseña" id="logpass"
+              formControlName="contrasena">
+          <i class="input-icon uil uil-lock-alt"></i>
+          <div class="text-danger"
+              *ngIf="usuarioForm.get('contrasena')?.hasError('required') && usuarioForm.get('contrasena')?.touched ">
+            <strong>  La contraseña es obligatoria!!!</strong>
+          </div>
+          <div class="text-danger"
+              *ngIf="usuarioForm.get('contrasena')?.hasError('pattern')">
+              La contraseña debe cumplir con los siguientes
+              requisitos:
+              <ul><strong>
+                  <li>Debe incluir números.</li>
+                  <li>Utilice una combinación de letras mayúsculas
+                      y minúsculas.</li>
+                  <li>Incluya caracteres especiales como * ? ! @ #
+                      $ / () = . , ; :</li>
+                  <li>Tenga una longitud mayor o igual a 8
+                      caracteres.</li>
+                    </strong>  </ul>
+          </div>
+          <div class="form-group mt-2">
+            <input type="password" name="logpass" class="form-style"
+                placeholder="Repetir contraseña" id="logpass"
+                formControlName="confirmarContrasena">
+            <i class="input-icon uil uil-lock-alt"></i>
+            <div class="text-danger"
+                *ngIf="usuarioForm.get('confirmarContrasena')?.hasError('required') && usuarioForm.get('confirmarContrasena')?.touched">
+                <span><strong>Este campo es
+                        obligatorio!!!</strong>*</span>
+            </div>
+            <div class="text-danger"
+                *ngIf="usuarioForm.hasError('contrasenaNoCoincide') && usuarioForm.get('confirmarContrasena')?.dirty">
+                <strong>Las contraseñas no coinciden.</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn mt-4" type="submit"
+        [disabled]="usuarioForm.invalid">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" #staticBackdrop id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Ingresa el token de verificación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+      </div>
+      <div class="modal-body">
+        <input type="text" id="codigoVerificacionInput"> <!-- Agrega el ID al input -->
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+        <button id="btnVerificarCodigo" type="button" class="btn btn-success" (click)="verificarCodigo()">Verificar</button>
+      </div>
+    </div>
+  </div>
+</div>

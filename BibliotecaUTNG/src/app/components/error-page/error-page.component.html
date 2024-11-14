@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #B1BCE6">
+  
+  <div class="container">
+      <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+              <a class="navbar-brand" routerLink="/home"><img src="assets/imagenes/logo.jpg" alt="logo" height="100px"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="https://media.utng.edu.mx/index.php/s/SmaZsvQ2GgJcrfh"
+                              target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i>Reglamento
+                              Bibliotecario</a>
+                      </li>
+                      <li class="nav-item" style="position: relative; right: 0%;">
+                          <a class="nav-link" routerLink="/home" routerLinkActive="active"><i
+                                  class="fas fa-user-circle"></i>Iniciar Sesión</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+  </div>
+</nav>
+<app-secundario-nav></app-secundario-nav>
+<div class="error-container">
+    <img src="assets/imagenes/error.png" alt="Error" width="300px">
+    <h1 class="mt-4">¡Oops! Algo salió mal</h1>
+    <p class="lead" id="error-message">Lo sentimos, parece que hubo un error al procesar tu solicitud.</p>
+    <button class="btn btn-primary mt-3" id="reload-button" (click)="redirigir()">Intentar de nuevo</button>
+  </div>
+
+  <!-- Enlaces a Bootstrap JS y dependencias -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

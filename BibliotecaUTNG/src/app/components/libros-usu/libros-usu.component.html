@@ -1,0 +1,28 @@
+<app-nabvar></app-nabvar>
+
+<app-ng-dynamic-breadcrumb class="floating-breadcrumb" [bgColor]="'none'" [fontSize]="'13px'" [fontColor]="'rgba(103,93,211,0.4)'"
+  [lastLinkColor]="'#6C5DD3'" [symbol]="' -> '">
+</app-ng-dynamic-breadcrumb>
+
+<div style="margin-top: 2%;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" *ngFor="let libro of libros">
+                <div class="card text-center">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        {{ libro.titulo }}
+                    </div>
+                    <div class="card card-body text-center cards">
+                        <img [src]="libro.img" class="card-img-top">
+                        <p>Titulo: {{ libro.titulo == '' ? 'Titulo Desconocido' : libro.titulo }}</p>
+                       <!-- <p>Autor: {{ libro.emailUser }}</p>-->
+                        <p>Editorial: {{ libro.fechaInicio }}</p>
+                        <p>Categoría: {{ libro.fechaFin }}</p>
+                        <div style="margin: 1%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

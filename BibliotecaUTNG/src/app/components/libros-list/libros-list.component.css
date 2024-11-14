@@ -1,0 +1,4 @@
+.cards:hover {
+    transform: scale(1.05); /* Cambia la escala de la tarjeta cuando el mouse está encima */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Agrega una sombra para resaltar la tarjeta */
+  }

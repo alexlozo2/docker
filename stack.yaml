@@ -1,0 +1,82 @@
+services:
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - 9090:80  # Mapeo del puerto externo (9090) al puerto interno (80)
+    environment:
+      PMA_ARBITRARY: 1  # Variable de entorno
+    depends_on:
+      - mysql-db  # Asegura que MySQL esté ejecutándose antes de PhpMyAdmin
+    deploy:
+      resources:
+        limits:
+          cpus: '0.20'  # Limitar el uso de CPU al 20%
+          memory: 200M  # Limitar el uso de memoria a 200MB
+        reservations:
+          cpus: '0.10'  # Recurso dedicado de CPU al 10%
+          memory: 100M  # Recurso dedicado de memoria a 100MB
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:  
+      - 3306:3306  # Mapeo del puerto externo e interno (3306)
+    environment:
+      MYSQL_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: qwerty  # Contraseña de root
+      MYSQL_DATABASE: dbBiblioteca # Nombre de la base de datos
+      MYSQL_USER: admin  # Usuario
+      MYSQL_PASSWORD: admin  # Contraseña del usuario
+    volumes:
+      - ./dbfiles:/docker-entrypoint-initdb.d  # Volumen persistente para los datos de MySQL
+      - ./mysqldata:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '0.30'  # Limitar el uso de CPU al 25%
+          memory: 200M  # Limitar el uso de memoria a 150MB
+        reservations:
+          cpus: '0.20'  # Recurso dedicado de CPU al 10%
+          memory: 100M  # Recurso dedicado de memoria a 50MB
+
+  servidor:
+    build:
+      context: ./servidor  # Directorio raíz del Dockerfile
+      dockerfile: Dockerfile
+    image: servidor # Nombre de la imagen para el backend
+    ports:
+      - 8080:3000  # Mapea el puerto externo 8080 al interno 3000
+    depends_on:
+      - mysql-db  # Asegura que MySQL esté ejecutándose antes del backend
+    environment:
+      MYSQL_HOST: mysql-db  # Nombre del servicio de MySQL para conectarse
+      MYSQL_USER: admin  # Usuario de la base de datos
+      MYSQL_PASSWORD: admin  # Contraseña del usuario
+      MYSQL_DATABASE: dbBiblioteca  # Nombre de la base de datos
+    deploy:
+      resources:
+        limits:
+          cpus: '0.35'  # Limitar el uso de CPU al 35%
+          memory: 350M  # Limitar el uso de memoria a 350MB
+        reservations:
+          cpus: '0.20'  # Recurso dedicado de CPU al 20%
+          memory: 250M  # Recurso dedicado de memoria a 250MB
+
+  biblioteca-utng:
+    build:
+      context: ./BibliotecaUTNG  # Directorio raíz del Dockerfile
+      dockerfile: Dockerfile
+    image: biblioteca-utng  # Nombre de la imagen para el frontend
+    ports:
+      - 80:80  # Mapea el puerto externo 80 al interno 80
+    depends_on:
+      - servidor  # Asegura que el backend esté ejecutándose antes del frontend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.30'  # Limitar el uso de CPU al 30%
+          memory: 300M  # Limitar el uso de memoria a 300MB
+        reservations:
+          cpus: '0.15'  # Recurso dedicado de CPU al 15%
+          memory: 200M  # Recurso dedicado de memoria a 200MB

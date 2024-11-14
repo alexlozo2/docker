@@ -1,0 +1,57 @@
+<app-nabvar></app-nabvar>
+
+<app-ng-dynamic-breadcrumb class="floating-breadcrumb" [bgColor]="'none'" [fontSize]="'13px'" [fontColor]="'rgba(103,93,211,0.4)'"
+  [lastLinkColor]="'#6C5DD3'" [symbol]="' -> '">
+</app-ng-dynamic-breadcrumb>
+<div style="margin-top: 2%;">
+    <div class="container">
+      <div class="row">
+        <!-- Lista de libros del usuario -->
+        <div class="col-md-3" *ngFor="let libro of libros">
+          <div class="card text-center">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+              {{ libro.titulo }}
+            </div>
+            <div class="card card-body text-center cards">
+              <img [src]="libro.img" class="card-img-top">
+              <p>Titulo: {{ libro.idLibro }}</p>
+              <p>Autor: {{ libro.emailUser }}</p>
+              <p>Editorial: {{ libro.fechaInicio }}</p>
+              <p>Categoría: {{ libro.fechaFin }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Formulario para pedir un libro prestado -->
+        <div class="col-md-6">
+          <div class="card shadow-lg">
+            <div class="card-header">
+              <h1 class="card-title text-center">Pedir Libro Prestado</h1>
+            </div>
+            <div class="card-body">
+              <form (ngSubmit)="crearPrestamo()">
+                <!-- Añade el campo para mostrar el ID del libro -->
+                <div class="form-group">
+                  <label for="idLibro">ID del Libro:</label>
+                  <input type="text" class="form-control" id="idLibro" name="idLibro" [(ngModel)]="idLibro" required readonly>
+                </div>
+                <!-- Campo de fecha de inicio -->
+                <div class="form-group">
+                  <label for="fechaInicio">Fecha de Inicio:</label>
+                  <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio" required [value]="obtenerFechaActual()" disabled>
+                </div>
+                <!-- Campo de fecha de devolución -->
+                <div class="form-group">
+                  <label for="fechaFin">Fecha de Devolución:</label>
+                  <input type="date" class="form-control" id="fechaFin" name="fechaFin" [(ngModel)]="fechaFin" required [min]="minFechaFin" [max]="maxFechaFin">
+                </div>
+                <!-- Botón para enviar el formulario -->
+                <button type="submit" class="btn btn-primary">Pedir Libro</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
